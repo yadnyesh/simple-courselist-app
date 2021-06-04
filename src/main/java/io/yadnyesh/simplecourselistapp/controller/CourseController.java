@@ -31,9 +31,9 @@ public class CourseController {
         return new ResponseEntity<>(courseService.createCourse(course), HttpStatus.CREATED);
     }
 
-    @PutMapping("/courses/{courseId")
+    @PutMapping("/courses/{courseId}")
     public ResponseEntity<Course> createNewCourses(@PathVariable String courseId, @RequestBody Course course) {
-        return new ResponseEntity<>(courseService.updateCourse(courseId, course), HttpStatus.CREATED);
+        return new ResponseEntity<>(courseService.updateCourse(courseId, course), HttpStatus.ACCEPTED);
     }
 
 

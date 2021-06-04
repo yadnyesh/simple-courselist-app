@@ -1,6 +1,7 @@
 package io.yadnyesh.simplecourselistapp.service;
 
 import io.yadnyesh.simplecourselistapp.model.Course;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -9,7 +10,7 @@ import java.util.Optional;
 import java.util.Random;
 import java.util.stream.Stream;
 
-@Service
+@Slf4j
 public class CourseServiceImpl implements CourseService{
 
     List<Course> courseList = new ArrayList<>();
@@ -48,9 +49,19 @@ public class CourseServiceImpl implements CourseService{
 
     @Override
     public Course updateCourse(String courseId, Course course) {
-        Stream<Course> existingCourse = courseList.stream()
-                                        .filter(c -> c.getCourseId().equals(Long.parseLong(courseId)));
-        existingCourse = (Stream<Course>) course;
+        Course existingCourse = courseList.stream()
+                                        .filter(c -> c.getCourseId().equals(Long.parseLong(courseId)))
+                                        .findAny()
+                                        .orElse(null);
+        log.info("Existing Course: " + existingCourse.toString());
+        course.setCourseId(existingCourse.getCourseId());
+        existingCourse = course;
+        log.info(course.toString());
         return (Course) existingCourse;
+    }
+
+    @Override
+    public void deleteCourse(String courseId) {
+
     }
 }
