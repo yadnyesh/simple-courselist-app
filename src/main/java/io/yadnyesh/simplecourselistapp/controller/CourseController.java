@@ -16,6 +16,7 @@ public class CourseController {
     CourseService courseService;
 
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/courses")
     public ResponseEntity<List<Course>> getAllCourses() {
         return new ResponseEntity<>(courseService.getAllCourses(), HttpStatus.OK);
@@ -26,6 +27,7 @@ public class CourseController {
         return new ResponseEntity<>(courseService.getCourseById(courseId), HttpStatus.OK);
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/courses")
     public ResponseEntity<Course> createNewCourses(@RequestBody Course course) {
         return new ResponseEntity<>(courseService.createCourse(course), HttpStatus.CREATED);
